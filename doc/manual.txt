@@ -1,0 +1,78 @@
+SpreadMath 1.1
+
+Copyright © 2015 Amit Shekhar Bongir
+
+SpreadMath is a simple Spreadsheet application. Along with text manipulation, it supports various mathematical operators and trigonometric functions, which could be operated upon the universal number system of complex numbers. Only '.sm' file formats supported
+
+Along with basic editing options it consists of functionalities for sorting selected cells, finding certain text, going to a particular cell, etc.
+
+Editing cells :
+	Press F2 to edit cells without erasing their previous content.
+Expressions:
+	An expression should begin with '=', else it is pure text. The expression could be text manipulation or mathematical expression (pure or with text manipulation).
+
+You could paste content of a certain cell into the desired cell by referring the cell's location (eg : "= a1" or "= A1", its case insensitive. The quotation marks used here are just to highlight it as content of a cell, not to be actually used). Also anything inside quotation marks ("...") is considered as text and not mathematical expression. The "\" (backslash) character is provided as an escape character, so that you may include quotation marks as part of text.
+You could concatenate content of different cells in desired cell,
+
+eg : = A1 B2 "any_text" C11	or	= A1 & B2 & "any_text" & C11 (more readable)
+	The operator '&' for concatenation is provided just for readability.
+
+NOTE : Blank spaces in the expression which aren't inside quotation marks are not considered for displaying the text of the cell.
+
+You could also do things like,
+	= A1 + 8 - 7 * 6 + sin(A2)
+where the text of cells A1 and A2 is expected to be a proper mathematical expression.
+
+All mathematical expressions are considered to be based on infix notation. It has following 5 operators in increasing order of precedence : - , + , *, / and ^, along with parantheses '(' ')'. The operator ^ has order of operation from right to left, eg. : 2 ^ 3 ^ 2 = 2 ^ 9 = 512 which is widely accepted.
+
+The calculation considers the division z / 0 for z not equal to zero as infinity. Any expression resulting in an indeterminate value is pin pointed out by showing which function/operator, with its argument(s), is leading to indeterminate value.(Technical : The calculation doesn't generate NaN condition at all. A check is made before an operation results to NaN)
+
+Entering mathematical expressions made easy :
+
+1) You need not use '*' if multiplication involves a symbolic constant or function. Eg. : 2sin(345) and pie are same as 2 * sin(345) and pi * e respectively.
+
+2) If the argument to any function is either purely real or purely complex then you need not use parantheses. Eg. : sin1.543 ,  asec0.5i ( Note : this is not the same as aseci0.5 which is asec(i) * 0.5 ).
+
+3) You are free to use expression like : sincostanasinacosatan(54.35*4-32i)
+ which is not much readable. So you may use spaces between operators, functions, parantheses; in short anywhere, to your own free will, for your readability. So above expression may be better written like :
+
+sin cos tan asin acos atan (54.35 * 4 - 32 i)    or (much better)     sin (cos (tan (asin (acos (atan (54.35 * 4 - 32 i))))))
+
+For a complex number z = x + y i, following is the list of functions supported :
+
+* sin(z)		Sine function
+* cos(z)		Cosine function
+* tan(z)		Tangent function
+* csc(z)		Cosecant function
+* sec(z)		Secant function
+* cot(z)		Cotangent function
+* asin(z)		Arcsine function
+* acos(z)		Arccosine function
+* atan(z)		Arctangent function
+* acsc(z)		Arccosecant function
+* asec(z)		Arcsecant function
+* acot(z)		Arccotangent function
+* sinh(z)		Hyperbolic Sine function
+* cosh(z)		Hyperbolic Cosine function
+* tanh(z)		Hyperbolic Tangent function
+* csch(z)		Hyperbolic Cosecant function
+* sech(z)		Hyperbolic Secant function
+* coth(z)		Hyperbolic Cotangent function
+* asinh(z)		Area Hyperbolic Sine function
+* acosh(z)		Area Hyperbolic Cosine function
+* atanh(z)		Area Hyperbolic Tangent function
+* acsch(z)		Area Hyperbolic Cosecant function
+* asech(z)		Area Hyperbolic Secant function
+* acoth(z)		Area Hyperbolic Cotangent function
+* ln(z)		Logarithm function with base e
+* log(z)		Logarithm function with base 10
+* lg(z)		Logarithm function with base 2
+* e ^ (z)		Exponential function
+* arg(z)		Argument function
+* abs(z)		Absolute function
+
+Symbolic constants :
+
+* pi	=  3.141593
+* e	=  2.718282
+* inf	=  infinity
