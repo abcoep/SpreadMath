@@ -22,8 +22,6 @@
 
 #include "math/func.h"
 
-extern sui unit;
-
 /*	Input : fun : the function, z : argument to the function
 	Output : Function fun performed on z and result stored in z itself
 */

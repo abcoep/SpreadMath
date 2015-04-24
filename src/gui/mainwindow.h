@@ -28,6 +28,7 @@
 
 QT_BEGIN_NAMESPACE
 class QAction;
+class QActionGroup;
 class QLabel;
 class FindDialog;
 class Spreadsheet;
@@ -51,6 +52,7 @@ class MainWindow : public QMainWindow
 		void find();
 		void gotocell();
 		void sort();
+		void changeAngleUnit();
 		void manual();
 		void about();
 		void openRecentFile();
@@ -89,6 +91,7 @@ class MainWindow : public QMainWindow
 		QMenu *selectSubMenu;
 		QMenu *toolsMenu;
 		QMenu *optionsMenu;
+		QMenu *angleSubMenu;
 		QMenu *helpMenu;
 		QToolBar *fileToolBar;
 		QToolBar *editToolBar;
@@ -111,9 +114,12 @@ class MainWindow : public QMainWindow
 		QAction *sortAction;
 		QAction *showGridAction;
 		QAction *autoRecalcAction;
+		QAction *degreesAction;
+		QAction *radiansAction;
 		QAction *manualAction;
 		QAction *aboutAction;
 		QAction *aboutQtAction;
+		QActionGroup *angleUnitGroup;
 		bool caseSensitive;
 		bool backSearch;
 };

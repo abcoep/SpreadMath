@@ -200,6 +200,21 @@ void MainWindow :: createActions()
 	autoRecalcAction->setChecked(spreadsheet->autoRecalculate());
 	autoRecalcAction->setStatusTip(tr("Switch auto-recalculation on or off"));
 	connect(autoRecalcAction, SIGNAL(toggled(bool)), spreadsheet, SLOT(setautoRecalculate(bool)));
+	
+	degreesAction = new QAction(tr("&Degrees"), this);
+	degreesAction->setCheckable(true);
+	degreesAction->setStatusTip(tr("Change unit of angle to degrees"));
+	connect(degreesAction, SIGNAL(triggered()), this, SLOT(changeAngleUnit()));
+	
+	radiansAction = new QAction(tr("&Radians"), this);
+	radiansAction->setCheckable(true);
+	radiansAction->setStatusTip(tr("Change unit of angle to radians"));
+	connect(radiansAction, SIGNAL(triggered()), this, SLOT(changeAngleUnit()));
+	
+	angleUnitGroup = new QActionGroup(this);
+	angleUnitGroup->addAction(degreesAction);
+	angleUnitGroup->addAction(radiansAction);
+	degreesAction->setChecked(true);
 
 	manualAction = new QAction(tr("&User manual"), this);
 	manualAction->setStatusTip(tr("Show the application's user manual"));
@@ -260,6 +275,10 @@ void MainWindow::createMenus()
 	optionsMenu = menuBar()->addMenu(tr("&Options"));
 	optionsMenu->addAction(showGridAction);
 	optionsMenu->addAction(autoRecalcAction);
+	
+	angleSubMenu = optionsMenu->addMenu(tr("&Angle"));
+	angleSubMenu->addAction(degreesAction);
+	angleSubMenu->addAction(radiansAction);
 
 	/* We insert a separator between the Options and Help menus. In
 	Motif and CDE styles, the separator pushes the Help menu to the right; in other styles, the separator is ignored */
@@ -653,6 +672,19 @@ void MainWindow::sort()
 		compare.ascending[2] = (dialog.tertiaryOrderCombo->currentIndex() == 0);
 		spreadsheet->sort(compare);
 	}
+}
+
+#define DEGREES 0
+#define RADIANS 1
+
+short unsigned int unit = DEGREES;
+void MainWindow::changeAngleUnit()
+{
+	if(degreesAction->isChecked())
+		unit = DEGREES;
+	else if(radiansAction->isChecked())
+		unit = RADIANS;
+	spreadsheet->recalculate();
 }
 
 void MainWindow::manual()

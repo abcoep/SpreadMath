@@ -112,7 +112,6 @@
 extern char buffer[256];
 extern size_t size;
 
-sui unit = 0;
 sui eflag = 0;
 static char error[31][6] = { "", "sin", "asin", "cos", "acos", "tan", "atan",
 			     		"csc", "acsc", "sec", "asec", "cot", "acot",

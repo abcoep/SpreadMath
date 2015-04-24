@@ -1,4 +1,4 @@
-equals(QT_MAJOR_VERSION, 4) {
+lessThan(QT_MAJOR_VERSION, 5) {
         error(Qt 5.2 or newer is required but version $$[QT_VERSION] was detected.)
 }
 
