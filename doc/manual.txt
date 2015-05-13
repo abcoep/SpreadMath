@@ -1,4 +1,4 @@
-SpreadMath 1.1
+SpreadMath 1.2
 
 Copyright © 2015 Amit Shekhar Bongir
 
@@ -26,6 +26,8 @@ where the text of cells A1 and A2 is expected to be a proper mathematical expres
 All mathematical expressions are considered to be based on infix notation. It has following 5 operators in increasing order of precedence : - , + , *, / and ^, along with parantheses '(' ')'. The operator ^ has order of operation from right to left, eg. : 2 ^ 3 ^ 2 = 2 ^ 9 = 512 which is widely accepted.
 
 The calculation considers the division z / 0 for z not equal to zero as infinity. Any expression resulting in an indeterminate value is pin pointed out by showing which function/operator, with its argument(s), is leading to indeterminate value.(Technical : The calculation doesn't generate NaN condition at all. A check is made before an operation results to NaN)
+
+The unit of angle can be set to degrees or radians.
 
 Entering mathematical expressions made easy :
 

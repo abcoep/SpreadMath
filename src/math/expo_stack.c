@@ -46,13 +46,13 @@ void push(expo_stack *es, double *Z)
 	es->curr = (node *)malloc(sizeof(node));
 	if(es->curr == NULL)
 	{
-        size += sprintf(&buffer[size], strerror(errno));
+        size += sprintf(&buffer[size], "%s", strerror(errno));
 		return;
 	}
 	es->curr->z = (double *)malloc(2 * sizeof(double));
 	if(es->curr->z == NULL)
 	{
-		size += sprintf(&buffer[size], strerror(errno));
+		size += sprintf(&buffer[size], "%s", strerror(errno));
 		return;
 	}
 	es->curr->z[0] = Z[0];

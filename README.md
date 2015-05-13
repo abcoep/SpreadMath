@@ -6,6 +6,16 @@ SpreadMath is a simple Spreadsheet application. Along with text manipulation, it
 
 Along with basic editing options it consists of functionalities for sorting selected cells, finding certain text, going to a particular cell, etc.
 
-To build the project from source, Qt version 5.2.1 or newer needs to be installed. Use QMake to build the project :
+Use QMake to build the project from source with either of the following Qt versions :
+
+1) Qt4 - 4.8 :
+
+    cd src && qmake-qt4 spreadmath.pro && make
+
+2) Qt5 - 5.2 or higher :
 
     cd src && qmake spreadmath.pro && make
+
+Then run the application with :
+
+    cd .. && ./spreadmath

@@ -27,15 +27,17 @@
 #include "gui/cell.h"
 #include "gui/c2cpp_interface.h"
 
-#include <Qt>
-#include <QString>
-#include <QVariant>
-#include <QRegExp>
+#include <QtGlobal>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#  include <QtWidgets>
+#else
+#  include <QtGui>
+#endif
 
 #define TOO_LONG 254
 
 #define ISDIGIT(X) ((X) >= '0' && (X) <= '9')
-#define ISALPHA(X) ((X) >= 'A' && (X) <= 'Z' || (X) >= 'a' && (X) <= 'z')
+#define ISALPHA(X) (((X) >= 'A' && (X) <= 'Z') || ((X) >= 'a' && (X) <= 'z'))
 
 inline short unsigned int isoperator(char ch)
 {
@@ -208,7 +210,7 @@ QString Cell::evalExpression(const QString &formula) const
 			A[++len] = '+';
 			parantheses++;
 		}
-		else if((ISDIGIT(A[len - 1]) || A[len - 1] == 'i' || A[len - 1] == 'e' && (A[len - 2] != 's' || A[len - 3] == 'b'				|| A[len - 3] == 'o') || A[len - 1] == 'f' ||  A[len - 1] == 's' && A[len - 2] == 'n') 									&& (ISDIGIT(A[len]) && !ISDIGIT(A[len - 1]) || isconst(A[len])))
+		else if((ISDIGIT(A[len - 1]) || A[len - 1] == 'i' || (A[len - 1] == 'e' && (A[len - 2] != 's')) || A[len - 3] == 'b'				|| A[len - 3] == 'o' || A[len - 1] == 'f' ||  (A[len - 1] == 's' && A[len - 2] == 'n')) 									&& ((ISDIGIT(A[len]) && !ISDIGIT(A[len - 1])) || isconst(A[len])))
 		{
 			oper = 1;
 			A[len + 1] = A[len];
@@ -217,7 +219,7 @@ QString Cell::evalExpression(const QString &formula) const
 		}
 		else if(isfun(A[len]))
 		{
-			if(A[len - 1] == 'i' || A[len - 1] == 'e' && (A[len - 2] != 's' || A[len - 3] == 'b') || A[len - 1] == 'f' 				|| ISDIGIT(A[len - 1]) || A[len - 1] == ')')
+			if(A[len - 1] == 'i' || (A[len - 1] == 'e' && (A[len - 2] != 's' || A[len - 3] == 'b')) || A[len - 1] == 'f' 				|| ISDIGIT(A[len - 1]) || A[len - 1] == ')')
 			{
 				oper = 1;
 				A[len + 1] = A[len];
@@ -225,9 +227,9 @@ QString Cell::evalExpression(const QString &formula) const
 				A[len - 1] = '*';
 			}
 		}
-		else if(A[len - 1] == 'i' && (A[len - 2] == 'i' && A[len - 3] != 'p' || A[len] == 'n' && A[len - 2] != 's'))
+		else if(A[len - 1] == 'i' && ((A[len - 2] == 'i' && A[len - 3] != 'p') || (A[len] == 'n' && A[len - 2] != 's')))
 		{
-			if(ISDIGIT(A[len - 2]) || A[len - 2] == 'i' || A[len - 2] == 'e' || A[len - 2] == 'f' || A[len -2] == 's' 					&& A[len - 3] != 'b' && A[len - 3] != 'o')
+			if(ISDIGIT(A[len - 2]) || A[len - 2] == 'i' || A[len - 2] == 'e' || A[len - 2] == 'f' || (A[len -2] == 's' 					&& A[len - 3] != 'b' && A[len - 3] != 'o'))
 			{
 				oper = 1;
 				A[len + 1] = A[len];

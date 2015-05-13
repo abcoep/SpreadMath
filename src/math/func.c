@@ -234,7 +234,7 @@ void func(sui fun, double *z)
 */
 void f(sui fun, double *z)
 {
-	double r = 0, tmpz[2], sum[2];
+	double r = 0, tmpz[2], sum[2] = {0, 0};
 	int i = 2;
 	short int sign = 1;
 	tmpz[0] = z[0], tmpz[1] = z[1];
@@ -325,7 +325,7 @@ void f(sui fun, double *z)
 			i = 1;
 			BR;
 	}
-	while(ABS(z[0]) >= 1.0e-8 && !ISINF(z[0]) || ABS(z[1]) >= 1.0e-8 && !ISINF(z[1]))
+	while((ABS(z[0]) >= 1.0e-8 && !ISINF(z[0])) || (ABS(z[1]) >= 1.0e-8 && !ISINF(z[1])))
 	{
 		switch(fun)
 		{
@@ -386,7 +386,7 @@ void arc(double *z, double *tz, short int add)
 		z[1] += tz[1];
 	ln(z);
 	if(ABS(tz[0]) < 1 && ABS(tz[1]) < 1)
-		if(!tz[0] && add == 1 || !tz[1] && add == -1)
+		if((!tz[0] && add == 1) || (!tz[1] && add == -1))
 			z[0] = 0;
 	if(!unit)
 		mult1(z, 180 / PI);

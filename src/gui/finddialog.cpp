@@ -26,7 +26,12 @@ contains the definition of Qt's GUI classes
 (that are part of the QtCore and QtGui modules)
 Including this header saves us the bother of 
 including every class individually */
-#include <QtWidgets>
+#include <QtGlobal>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#  include <QtWidgets>
+#else
+#  include <QtGui>
+#endif
 #include "gui/finddialog.h"
 
 // Dialog's constructor

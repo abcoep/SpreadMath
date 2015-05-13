@@ -47,53 +47,53 @@
 }
 #define PRINTERROR 							\
 {									\
-	size += sprintf(&buffer[size], "#Invalid function ");				\
+	size += sprintf(&buffer[size], "#Invalid function ");		\
 	if(inv)								\
-		size += sprintf(&buffer[size], "'a"); 					\
+		size += sprintf(&buffer[size], "'a"); 			\
 	else 								\
-		size += sprintf(&buffer[size], "'"); 					\
+		size += sprintf(&buffer[size], "'"); 			\
 	while(!ISDIGIT(A[pos]) && A[pos] != '(' && A[pos] != ')')	\
-		size += sprintf(&buffer[size], "%c", A[pos++]);			\
-	size += sprintf(&buffer[size], "' in the expression"); 			\
+		size += sprintf(&buffer[size], "%c", A[pos++]);		\
+	size += sprintf(&buffer[size], "' in the expression"); 		\
 }
-#define PRINTINDETER(X, Y, C)			\
-{						\
+#define PRINTINDETER(X, Y, C)					\
+{								\
 	size += sprintf(&buffer[size], "#");			\
-	PRINTARG(X)				\
+	PRINTARG(X)						\
 	size += sprintf(&buffer[size], " %c ", C);		\
-	if(Y[0] && !Y[1] || !Y[0] && Y[1])	\
-	{					\
-		if(Y[0] < 0 || Y[1] < 0)	\
-		{				\
+	if((Y[0] && !Y[1]) || (!Y[0] && Y[1]))			\
+	{							\
+		if(Y[0] < 0 || Y[1] < 0)			\
+		{						\
 			size += sprintf(&buffer[size], "(");	\
-			PRINTARG(Y)		\
+			PRINTARG(Y)				\
 			size += sprintf(&buffer[size], ")");	\
-		}				\
-		else				\
-			PRINTARG(Y)		\
-	}					\
-	else					\
-		PRINTARG(Y)			\
+		}						\
+		else						\
+			PRINTARG(Y)				\
+	}							\
+	else							\
+		PRINTARG(Y)					\
 	size += sprintf(&buffer[size], " is indeterminate");	\
 }
-#define PRINTARG(G)							\
-{									\
-	if(G[0] && G[1])						\
+#define PRINTARG(G)									\
+{											\
+	if(G[0] && G[1])								\
 		size += sprintf(&buffer[size], "(");					\
-	if(G[0] || G[0] == G[1])					\
+	if(G[0] || G[0] == G[1])							\
 		size += sprintf(&buffer[size], "%.6g", G[0]);				\
-	if(G[1])							\
-	{								\
-		if(G[0])						\
-		{							\
-			if(G[1] < 0)					\
+	if(G[1])									\
+	{										\
+		if(G[0])								\
+		{									\
+			if(G[1] < 0)							\
 				size += sprintf(&buffer[size], " - %.6g i)", -G[1]);	\
-			else						\
+			else								\
 				size += sprintf(&buffer[size], " + %.6g i)", G[1]);	\
-		}							\
-		else							\
-			size += sprintf(&buffer[size], "%.6g i", G[1]);		\
-	}								\
+		}									\
+		else									\
+			size += sprintf(&buffer[size], "%.6g i", G[1]);			\
+	}										\
 }
 #define DOTHESTUFF(X)			\
 {					\
@@ -149,7 +149,7 @@ double *calc(char A[], sui len)
 		B[r][1] = (double *) malloc(2 * sizeof(double));	/* 2nd operand */
 		if(B[r][0] == NULL || B[r][1] == NULL)
 		{
-			size += sprintf(&buffer[size], strerror(errno));
+			size += sprintf(&buffer[size], "%s", strerror(errno));
 			int j;
 			for(j = 0; j < r; ++j)
 			{
@@ -522,4 +522,5 @@ double *calc(char A[], sui len)
 			}
 		}
 	}
+	return NULL;
 }

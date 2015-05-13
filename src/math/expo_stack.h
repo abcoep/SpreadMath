@@ -34,6 +34,7 @@ typedef struct expo_stack
 }expo_stack;
 
 void init(expo_stack *);
+int empty(expo_stack *es);
 void push(expo_stack *, double *);
 double *pop(expo_stack *);
 

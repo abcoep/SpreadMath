@@ -20,8 +20,12 @@
  * write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston MA 02110-1301, USA.
  *****************************************************************************/
-
-#include <QtWidgets>
+#include <QtGlobal>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#  include <QtWidgets>
+#else
+#  include <QtGui>
+#endif
 
 #include "gui/cell.h"
 
